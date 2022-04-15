@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>学生签到考勤</title>
+    <style>
+        .div-inline{ display:inline }
+    </style>
+</head>
+<style>
+   
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="./login.js"></script>
+<body background="./背景图片.webp" style="background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+    <script>
+        function Login() {
+            const name = document.getElementById('username').value;
+            const num = document.getElementById('num').value;
+            const grade = document.getElementById('grade').value;
+            const class_name = document.getElementById('classname').value;
+            const major = document.getElementById('major').value;
+            const code = document.getElementById('code').value;
+            var params = {
+                "username": name,
+                "num": num,
+                "grade": grade,
+                "major": major,
+                "code": code,
+                "classname": class_name,
+                "isLogin": "yes"
+            };
+            $.ajax({
+                type:"POST",
+                async:false,
+                url:"http://10.52.224.45:8080",
+                data:params,
+                dataType:"json",
+                success:function (res) {
+                    status = res.status;
+                    time = res.time;
+                    //window.location.href="./login_success.html?status=" + status + "&time=" + time;
+                    alert(status + ' at ' + time);
+                }
+            });
+        }
+        
+    </script>
+    <h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </h1>
+
+    <div class="container">
+        <!-- <form action="http://10.52.224.45:8080" method="post"> -->
+            <h2 style="right:40px" align="center">学生考勤签到</h2>
+            </br>
+            <div align="center">
+                <div class="div-inline" >
+                    <h3 style="display:inline"> 姓名:</h3>
+                    <input type="text" id="username" placeholder="输入" name="username"
+                        style="display:inline;height:25px;width:80px;font-size:15px">
+                </div>&nbsp&nbsp&nbsp
+                <div class="div-inline">
+                    <h3 style="display:inline"> 年级：</h3>
+                    <input type="text" id="grade" placeholder="输入" name="grade"
+                        style="display:inline;height:25px;width:80px;font-size:15px">
+                </div>
+            </div>
+            </br>
+            <div align="center">
+                <h3 style="display:inline"> 学号:</h3>
+                <input type="text" id="num" placeholder="输入" name="num"
+                    style="display:inline;height:25px;width:252px;font-size:15px">
+                <input type="hidden" name="isLogin" value="yes">
+            </div>
+            </br>
+            <div align="center">
+                <div class="div-inline">
+                    <h3 style="display:inline"> 课程:</h3>
+                    <input type="text" id="classname" placeholder="输入" name="classname"
+                        style="display:inline;height:25px;width:80px;font-size:10px">
+                </div>&nbsp&nbsp&nbsp
+                <div class="div-inline">
+                    <h3 style="display:inline"> 专业：</h3>
+                    <input type="text" id="major" placeholder="输入" name="major"
+                        style="display:inline;height:25px;width:80px;font-size:10px">
+                </div>
+            </div>
+            </br>
+            <div align="center">
+                <div class="div-inline">
+                    <h3 style="display:inline"> 口令:</h3>
+                    <input type="text" id="code" placeholder="输入" name="code"
+                        style="display:inline;height:25px;width:252px;font-size:15px">
+                </div>
+            </div>
+            </br>
+            <center><button id='confirm_btn' style="height:30px;font-size:20px" onclick="Login()">确定</button></center>
+        <!-- </form> -->
+    </div>
+
+    <h1>
+        <br/>
+    </h1>
+
+</body>
+</html>
